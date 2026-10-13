@@ -1,5 +1,5 @@
 
-export class Activity {
+export class Weather {
   get latitude(): number {
     return this._latitude;
   }
