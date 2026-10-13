@@ -1,4 +1,4 @@
-export class AquaticCentersEntity {
+export class AquaticCenters {
   private _id: number;
   private _name: string;
   private _activityType: string;
