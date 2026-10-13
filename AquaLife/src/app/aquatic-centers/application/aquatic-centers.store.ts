@@ -88,4 +88,7 @@ export class AquaticCentersStore {
   readonly latestAvailableObservation = computed(
     () => this.reservationsSignal().find((observation) => observation.hasValue) ?? null,
   );
+
+
+
 }

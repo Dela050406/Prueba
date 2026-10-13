@@ -28,16 +28,18 @@ export class NewReservation {
   private router = inject(Router);
   private aquaticCentersStore = inject(AquaticCentersStore);
 
+  latestObservation = this.aquaticCentersStore.latestAvailableObservation;
+
   form = this.fb.group({
-    regionCode: new FormControl<string>('', {
+    activityType: new FormControl<string>('', {
       nonNullable: true,
       validators: [Validators.required],
     }),
-    countryCode: new FormControl<string>('', {
+    participantName: new FormControl<string>('', {
       nonNullable: true,
       validators: [Validators.required],
     }),
-    indicatorId: new FormControl<string>('', {
+    participants: new FormControl<string>('', {
       nonNullable: true,
       validators: [Validators.required],
     }),
@@ -45,28 +47,19 @@ export class NewReservation {
 
   loading = this.aquaticCentersStore.loading;
 
-
-  /** Computed: true when the provider reported no usable value for the selection. */
   hasNoValue = computed(
     () => this.isSelectionComplete() && !this.loading() && this.latestObservation() === null,
   );
 
-  /** Computed: true when the registration can be submitted. */
   canCreate = computed(
     () => this.isSelectionComplete() && !this.loading() && this.latestObservation() !== null,
   );
 
-  /** Resets the country and the loaded observations when the region changes. */
-  onRegionChange(): void {
-    this.form.controls.countryCode.setValue('');
-    this.aquaticCentersStore.clearObservations();
-  }
 
-  /** Loads the observations once a country and an indicator are selected. */
   onSelectionChange(): void {
     this.aquaticCentersStore.loadObservations(
-      this.form.controls.countryCode.value,
-      this.form.controls.indicatorId.value,
+      this.form.controls.participantName.value,
+      this.form.controls.participants.value,
     );
   }
 
