@@ -1,0 +1,71 @@
+<div class="form-container">
+  <h1>{{ 'indicator.new-title' | translate }}</h1>
+  <h2>{{ 'indicator.subtitle' | translate }}</h2>
+
+  <form [formGroup]="form" (ngSubmit)="submit()" aria-label="New Economic Indicator Form">
+    <mat-form-field appearance="outline">
+      <mat-label>{{ 'indicator.region-code' | translate }}</mat-label>
+      <mat-select formControlName="regionCode" (selectionChange)="onRegionChange()" aria-required="true">
+        @for (regionCode of regionCodes(); track regionCode) {
+          <mat-option [value]="regionCode">{{ regionCode }} - {{ 'region.' + regionCode.toLowerCase() | translate }}</mat-option>
+        }
+      </mat-select>
+      @if (form.get('regionCode')?.touched && form.get('regionCode')!.hasError('required')) {
+        <mat-error>{{ 'indicator.error.region-required' | translate }}</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>{{ 'indicator.country' | translate }}</mat-label>
+      <mat-select formControlName="countryCode" (selectionChange)="onSelectionChange()" aria-required="true">
+        @for (country of countries(); track country.code) {
+          <mat-option [value]="country.code">{{ country.name }}</mat-option>
+        }
+      </mat-select>
+      @if (form.get('countryCode')?.touched && form.get('countryCode')!.hasError('required')) {
+        <mat-error>{{ 'indicator.error.country-required' | translate }}</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>{{ 'indicator.economic-indicator' | translate }}</mat-label>
+      <mat-select formControlName="indicatorId" (selectionChange)="onSelectionChange()" aria-required="true">
+        @for (indicator of economicIndicators; track indicator.id) {
+          <mat-option [value]="indicator.id">{{ indicator.name }}</mat-option>
+        }
+      </mat-select>
+      @if (form.get('indicatorId')?.touched && form.get('indicatorId')!.hasError('required')) {
+        <mat-error>{{ 'indicator.error.indicator-required' | translate }}</mat-error>
+      }
+    </mat-form-field>
+
+    @if (observatory(); as observatory) {
+      <p class="observatory">{{ 'indicator.observatory' | translate }}: {{ observatory.name }}</p>
+    }
+
+    @if (loading()) {
+      <p role="status">{{ 'indicator.loading' | translate }}</p>
+    }
+
+    @if (latestObservation(); as observation) {
+      <p class="resolved" role="status">
+        <strong>{{ 'indicator.resolved-value' | translate }}:</strong> {{ observation.value | number:'1.0-2' }}
+        &nbsp;&nbsp;
+        <strong>{{ 'indicator.resolved-year' | translate }}:</strong> {{ observation.reportYear }}
+      </p>
+    }
+
+    @if (hasNoValue()) {
+      <p class="no-value" role="alert">{{ 'indicator.error.no-value' | translate }}</p>
+    }
+
+    <div class="form-actions">
+      <button mat-raised-button type="submit" [disabled]="!canCreate()" aria-label="Create economic indicator item">
+        {{ 'indicator.create' | translate }}
+      </button>
+      <button mat-button type="button" (click)="cancel()" aria-label="Cancel and go home">
+        {{ 'indicator.cancel' | translate }}
+      </button>
+    </div>
+  </form>
+</div>

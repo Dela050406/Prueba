@@ -13,7 +13,7 @@ export class Reservations {
     participantName: string,
     participants: number,
     weatherTemperature: number,
-    reservedAt: number
+    reservedAt: number,
   ) {
     this._aquaticCenterId = aquaticCenterId;
     this._activityType = activityType;
@@ -69,5 +69,9 @@ export class Reservations {
 
   set reservedAt(value: number) {
     this._reservedAt = value;
+  }
+
+  get hasValue(): boolean {
+    return this._aquaticCenterId !== null;
   }
 }

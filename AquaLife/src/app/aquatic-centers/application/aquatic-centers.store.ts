@@ -79,4 +79,13 @@ export class AquaticCentersStore {
         },
       });
   }
+
+  clearObservations(): void {
+    this.reservationsSignal.set([]);
+    this.errorSignal.set(null);
+  }
+
+  readonly latestAvailableObservation = computed(
+    () => this.reservationsSignal().find((observation) => observation.hasValue) ?? null,
+  );
 }

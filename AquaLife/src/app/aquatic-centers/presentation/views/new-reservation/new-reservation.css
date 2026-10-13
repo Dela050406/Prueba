@@ -1,0 +1,5 @@
+.form-container { margin: 10px; max-width: 640px; }
+form { display: flex; flex-direction: column; }
+.observatory, .resolved { margin: 4px 0 12px; }
+.no-value { margin: 4px 0 12px; color: var(--mat-sys-error); }
+.form-actions { display: flex; gap: 8px; margin-top: 8px; }
