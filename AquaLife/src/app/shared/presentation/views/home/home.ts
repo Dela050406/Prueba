@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {TranslatePipe} from '@ngx-translate/core';
-import {MyEconomicIndicators} from '../../../../observatories/presentation/components/my-economic-indicators/my-economic-indicators';
+import {MyEconomicIndicators} from '../../../../observatories/presentation/components/my-aquatic-centers/my-aquatic-centers';
 
 @Component({
   selector: 'app-home',

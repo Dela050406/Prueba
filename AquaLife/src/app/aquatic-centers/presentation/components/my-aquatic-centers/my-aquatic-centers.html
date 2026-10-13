@@ -1,0 +1,15 @@
+<section aria-labelledby="my-aquatic-centers-title">
+  <h2 id="my-aquatic-centers-title">{{ 'home.my-aquatic-centers' | translate }}</h2>
+
+  @if (store.isEmpty()) {
+    <p role="status">{{ 'home.empty' | translate }}</p>
+  } @else {
+    <mat-grid-list cols="2" rowHeight="250px" gutterSize="16px">
+      @for (item of store.aquaticCenters(); track item.id) {
+        <mat-grid-tile>
+          <app-aquatic-center-summary [item]="item"/>
+        </mat-grid-tile>
+      }
+    </mat-grid-list>
+  }
+</section>
