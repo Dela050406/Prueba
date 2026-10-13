@@ -6,6 +6,16 @@ export class AquaticCentersEntity {
   private _latitude: number;
   private _longitude: number;
 
+  constructor(id: number, name: string, activityType: string, capacity: number, latitude: number, longitude: number,)
+  {
+    this._id = id;
+    this._name = name;
+    this._activityType = activityType;
+    this._capacity = capacity;
+    this._latitude = latitude;
+    this._longitude = longitude;
+  }
+
   get id(): number {
     return this._id;
   }
