@@ -10,8 +10,7 @@ export class AquaticCentersAssembler implements BaseAssembler<
 > {
   toEntitiesFromResponse(response: AquaticCentersResponse): AquaticCenters[] {
     return response['aquatic-centers'].map((resource) =>
-      this.toEntityFromResource(resource),
-    );
+      this.toEntityFromResource(resource));
   }
 
   toEntityFromResource(resource: AquaticCentersResource): AquaticCenters {
