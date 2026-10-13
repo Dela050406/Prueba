@@ -3,7 +3,10 @@ import { BaseAssembler } from '../../shared/infrastructure/base-assembler';
 import { Reservations } from '../domain/model/reservations-entity';
 import { ReservationsResource, ReservationsResponse } from './reservations-response';
 
-export class ReservationsAssembler implements BaseAssembler<  Reservations,  ReservationsResource,  ReservationsResponse
+export class ReservationsAssembler implements BaseAssembler<
+  Reservations,
+  ReservationsResource,
+  ReservationsResponse
 > {
   toEntitiesFromResponse(response: ReservationsResponse): Reservations[] {
     return response['reservations'].map((resource) => this.toEntityFromResource(resource));
@@ -31,3 +34,5 @@ export class ReservationsAssembler implements BaseAssembler<  Reservations,  Res
     } as ReservationsResource;
   }
 }
+
+
