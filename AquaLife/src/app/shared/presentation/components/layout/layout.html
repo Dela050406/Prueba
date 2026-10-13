@@ -1,0 +1,16 @@
+<mat-toolbar role="banner" aria-label="World Bank Economic Monitoring Platform toolbar">
+  <mat-toolbar-row>
+    <img [src]="logoUrl" alt="World Bank logo" height="32" width="32" class="logo"/>
+    <span>World Bank Economic Monitoring Platform</span>
+    <div class="mat-spacer"></div>
+    @for (option of options(); track option.label) {
+      <a mat-button [routerLink]="option.link" routerLinkActive="active" [attr.aria-label]="option.label | translate">
+        {{ option.label | translate }}
+      </a>
+    }
+    <div class="mat-spacer"></div>
+    <app-language-switcher/>
+  </mat-toolbar-row>
+</mat-toolbar>
+<router-outlet/>
+<app-footer-content/>

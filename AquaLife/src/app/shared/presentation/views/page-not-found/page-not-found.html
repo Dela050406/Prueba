@@ -1,0 +1,7 @@
+<div class="container-with-spacing">
+  <h1>{{ 'page-not-found.title' | translate }}</h1>
+  <p>{{ 'page-not-found.message' | translate: {path: invalidPath} }}</p>
+  <button mat-raised-button (click)="navigateToHome()" aria-label="Go home">
+    {{ 'page-not-found.go-home' | translate }}
+  </button>
+</div>
