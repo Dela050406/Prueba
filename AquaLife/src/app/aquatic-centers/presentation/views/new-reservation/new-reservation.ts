@@ -8,6 +8,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {TranslatePipe} from '@ngx-translate/core';
 import {DecimalPipe} from '@angular/common';
 import {Reservation} from '../../../domain/model/reservations-entity';
+import { AquaticCenters } from '../../../domain/model/aquatic-centers-entity';
 import { AquaticCentersStore } from '../../../application/aquatic-centers.store';
 
 @Component({
@@ -64,22 +65,16 @@ export class NewReservation {
   }
 
   submit(): void {
-    const observation = this.latestObservation();
-    const observatory = this.observatory();
-    if (this.form.invalid || !observation || observation.value === null || !observatory) return;
+    const reservation = this.latestObservation();
+    const reservations = this.observatory();
+    if (this.form.invalid || !reservation || reservation.value === null || !reservations) return;
 
-    const country = this.aquaticCentersStore.getReservation(this.form.controls.countryCode.value);
+    const country = this.aquaticCentersStore.getReservations(this.form.controls.activityType.value);
     const item = new Reservation({
       id: 0,
-      observatoryId: observatory.id,
-      regionCode: this.form.controls.regionCode.value,
-      countryCode: observation.countryCode || country?.isoCode || '',
-      countryName: observation.countryName || country?.name || '',
-      indicatorId: observation.indicatorId,
-      indicatorName: observation.indicatorName,
-      indicatorValue: observation.value,
-      reportYear: observation.reportYear,
-      registeredAt: new Date().toISOString(),
+      activityType: this.form.controls.activityType.value,
+      participantName: this.form.controls.participantName.value,
+      participants: this.form.controls.participants.value,
     });
 
     this.aquaticCentersStore.addReservation(item);
