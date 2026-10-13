@@ -66,7 +66,7 @@ export class NewReservation {
 
   submit(): void {
     const reservation = this.latestObservation();
-    const reservations = this.observatory();
+    const reservations = this.reservation();
     if (this.form.invalid || !reservation || reservation.value === null || !reservations) return;
 
     const country = this.aquaticCentersStore.getReservations(this.form.controls.activityType.value);
