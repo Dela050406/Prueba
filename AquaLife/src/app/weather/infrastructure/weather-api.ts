@@ -2,29 +2,13 @@ import {inject, Service} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {BaseApi} from '../../shared/infrastructure/base-api';
-import { AquaticCentersEndpoint } from './aquatic-centers-endpoint';
-import { ReservationsEndpoint } from './reservations-endpoint';
-import { AquaticCenters } from '../domain/model/aquatic-centers-entity';
-import { Reservations } from '../domain/model/reservations-entity';
+import {CurrentWeather} from '../domain/model/current-weather.entity';
+import {CurrentWeatherApiEndpoint} from './current-weather-api-endpoint';
 
-
-/**
- * Infrastructure facade for observatories endpoint operations.
- * @author Mathias De la Cruz
- */
 @Service()
 export class WeatherApi extends BaseApi {
-  private readonly http = inject(HttpClient);
-  private readonly aquaticCentersEndpoint = new AquaticCentersEndpoint(this.http);
-  private readonly reservationsEndpoint = new ReservationsEndpoint(this.http);
+  private readonly currentWeatherEndpoint = new CurrentWeatherApiEndpoint(inject(HttpClient));
 
-  getAquaticCenters(): Observable<AquaticCenters[]> {
-    return this.aquaticCentersEndpoint.getAll();
-  }
-  getReservations(): Observable<Reservations[]> {
-    return this.reservationsEndpoint.getAll();
-  }
-  createReservations(item: Reservations): Observable<Reservations> {
-    return this.reservationsEndpoint.create(item);
-  }
+  getCurrentWeather = (latitude: number, longitude: number): Observable<CurrentWeather> =>
+    this.currentWeatherEndpoint.getByCoordinates(latitude, longitude);
 }
